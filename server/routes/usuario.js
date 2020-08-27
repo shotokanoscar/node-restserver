@@ -1,18 +1,19 @@
 const express = require('express');
-const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 const _ = require('underscore'); // standar para ocupar underscore es co guion 
+const Usuario = require('../models/usuario');
+
 const { verificaToken, verificaAdmin_Role } = require('../middlewares/autentificacion');
 
 const app = express();
 
 app.get('/usuario', verificaToken, (req, res) => {
 
-    return res.json({
+    /*return res.json({
         usuario: req.usuario,
         nombre: req.usuario.nombre,
         email: req.usuario.email
-    });
+    });*/
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
@@ -118,7 +119,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, re
 
 
     // Usuario.findByIdAndRemove(id, (err, usuarioborrado) => {
-    Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioborrado) => {
+    Usuario.findByIdAndUpdate(id, cambiaEstado, { new: true }, (err, usuarioBorrado) => {
         if (err) {
             //reponse  
             return res.status(400).json({
@@ -127,7 +128,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, re
             });
         }
 
-        if (!usuarioborrado) {
+        if (!usuarioBorrado) {
             return res.status(400).json({
                 ok: false,
                 err: {
@@ -138,7 +139,7 @@ app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, re
 
         res.json({
             ok: true,
-            usuario: usuarioborrado
+            usuario: usuarioBorrado
         })
 
     })

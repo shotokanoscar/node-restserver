@@ -20,7 +20,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 // 24 horas 
 // 30 dias
 
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+//process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+process.env.CADUCIDAD_TOKEN = '48h';
+
 
 //==========================================================================
 // SEDD de autentificacion
@@ -41,3 +43,9 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URLDB = urlDB;
+
+//==========================================================================
+//google client id
+//==========================================================================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '945163453386-ep9oatj4nae8e24ctsl65439h2l85tm3.apps.googleusercontent.com';
